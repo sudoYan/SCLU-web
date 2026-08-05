@@ -23,6 +23,8 @@ export default function Nav() {
         <a href="#union">Union</a>
         <a href="#campaigns">Campaigns</a>
         <Magnetic strength={0.3}>
+          <a href="#press">Press</a>
+          <a href="#team">Team</a>
           <a className="nav-cta" href="#join">Join ✊</a>
         </Magnetic>
       </div>

@@ -25,13 +25,14 @@ a { color: inherit; }
 /* custom cursor */
 body.has-cursor, body.has-cursor * { cursor: none; }
 .cursor-dot {
-  position: fixed; z-index: 100; width: 10px; height: 10px; margin: -5px 0 0 -5px;
+  position: fixed; z-index: 100; width: 8px; height: 8px; margin: -4px 0 0 -4px;
   border-radius: 50%; background: var(--blue); pointer-events: none;
 }
 .cursor-ring {
-  position: fixed; z-index: 99; width: 38px; height: 38px; margin: -19px 0 0 -19px;
-  border-radius: 50%; border: 2px solid var(--blue); pointer-events: none;
-  transition: width .2s, height .2s, margin .2s, background-color .2s;
+  position: fixed; z-index: 99; width: 30px; height: 30px; margin: -15px 0 0 -15px;
+  border-radius: 50%; border: 2px solid var(--blue);
+  background: color-mix(in srgb, var(--pale) 40%, transparent);
+  pointer-events: none;
 }
 .cursor-ring--on {
   width: 58px; height: 58px; margin: -29px 0 0 -29px;
@@ -53,7 +54,11 @@ body.has-cursor, body.has-cursor * { cursor: none; }
 }
 .nav--scrolled { box-shadow: 0 7px 0 var(--pale); padding-block: 0.45rem; }
 .nav-logo { display: inline-flex; text-decoration: none; }
-.nav-logo-img { height: 36px; width: auto; transition: height .3s ease, transform .3s ease; }
+.nav-logo-img {
+  height: 36px; width: auto;
+  mix-blend-mode: multiply;              /* white bg disappears on white nav */
+  transition: height .3s ease, transform .3s ease;
+}
 .nav--scrolled .nav-logo-img { height: 27px; }
 .nav-logo:hover .nav-logo-img { transform: rotate(-3deg) scale(1.05); }
 .nav-links { display: flex; gap: 1.1rem; align-items: center; flex-wrap: wrap; }
@@ -95,7 +100,12 @@ body.has-cursor, body.has-cursor * { cursor: none; }
 .tile--s .hero-letter-hv, .tile--u .hero-letter-hv { background: var(--white); color: var(--blue); }
 .tile--c .hero-letter-hv, .tile--l .hero-letter-hv { background: var(--pale); color: var(--blue); }
 
-.hero-wordmark { position: absolute; z-index: 3; width: min(74vw, 780px); pointer-events: none; filter: drop-shadow(0 16px 44px rgba(0,0,0,.4)); }
+.hero-wordmark {
+  position: absolute; z-index: 3; width: min(74vw, 780px);
+  pointer-events: none;
+  mix-blend-mode: screen;                /* black bg disappears on blue hero */
+  will-change: transform, opacity;
+}
 
 .hero-meta { position: absolute; z-index: 2; bottom: 6.5vh; text-align: center; color: var(--white); width: min(900px, 92vw); }
 .hero-meta h1 {
@@ -109,7 +119,12 @@ body.has-cursor, body.has-cursor * { cursor: none; }
   font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em;
   box-shadow: 4px 4px 0 var(--pale); background: rgba(255,255,255,.06);
 }
-.hero-justice { position: absolute; z-index: 1; right: 4vw; top: 11vh; width: clamp(90px, 15vw, 200px); opacity: 0.95; }
+.hero-justice {
+  position: absolute; z-index: 1; right: 4vw; top: 11vh;
+  width: clamp(90px, 15vw, 200px);
+  mix-blend-mode: screen;
+  will-change: transform;
+}
 .hero-cue {
   position: absolute; bottom: 1.1rem; left: 50%; transform: translateX(-50%);
   color: var(--pale); font-size: 0.72rem; letter-spacing: 0.25em; text-transform: uppercase;
@@ -195,15 +210,18 @@ body.has-cursor, body.has-cursor * { cursor: none; }
 .footer-grid { display: flex; justify-content: space-between; gap: 2rem; flex-wrap: wrap; }
 .footer h3 { text-transform: uppercase; margin: 0 0 0.8rem; color: var(--pale); }
 .footer a { text-decoration: none; border-bottom: 2px solid var(--pale); }
-.footer-logo { width: min(320px, 60vw); filter: drop-shadow(6px 6px 0 rgba(0,0,0,.25)); }
+.footer-logo { width: min(320px, 60vw); mix-blend-mode: screen; }
 .footer small { display: block; margin-top: 2.5rem; opacity: 0.7; line-height: 1.6; }
 
 .justice-float {
-  position: fixed; right: 1.1rem; bottom: 1.1rem; z-index: 45; width: 88px; aspect-ratio: 1;
-  border-radius: 50%; background: var(--blue); border: 3px solid var(--pale);
-  box-shadow: 6px 6px 0 rgba(5,65,164,.25); display: grid; place-items: center; pointer-events: none;
+  position: fixed; right: 1.1rem; bottom: 1.1rem; z-index: 45;
+  width: 88px; aspect-ratio: 1; border-radius: 50%;
+  background: var(--blue); border: 3px solid var(--pale);
+  box-shadow: 6px 6px 0 rgba(5,65,164,.25);
+  display: grid; place-items: center; pointer-events: none;
+  will-change: transform;
 }
-.justice-float img { width: 72%; animation: float 6s ease-in-out infinite; }
+.justice-float img { width: 78%; mix-blend-mode: screen; animation: float 6s ease-in-out infinite; }
 @keyframes float { 50% { transform: translateY(-7px); } }
 
 @media (max-width: 900px) {
@@ -217,3 +235,53 @@ body.has-cursor, body.has-cursor * { cursor: none; }
   html { scroll-behavior: auto; }
   .marquee-track, .hero-cue, .justice-float img { animation: none; }
 }
+
+/* ---------- section headers ---------- */
+.section-kicker { text-transform: uppercase; letter-spacing: .22em; font-weight: 700; color: var(--blue); margin: 0 0 .4rem; }
+.section-title { font-family: var(--font-logo), serif; font-size: clamp(2.6rem, 7vw, 5rem); text-transform: uppercase; color: var(--blue-deep); margin: 0 0 .6rem; line-height: 1.02; }
+.section-sub { max-width: 60ch; font-weight: 600; }
+
+/* ---------- press board ---------- */
+.press { padding: clamp(4.5rem, 10vw, 8rem) 0; background: var(--white); border-top: var(--border); }
+.press-board { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.8rem; margin-top: 2.6rem; }
+.clipping {
+  position: relative; background: var(--white); border: var(--border);
+  box-shadow: 8px 8px 0 var(--pale); padding: 1.5rem 1.2rem 1.2rem;
+  touch-action: none; user-select: none;
+}
+.clipping-tape {
+  position: absolute; top: -14px; left: 50%; width: 96px; height: 26px;
+  transform: translateX(-50%) rotate(-2deg);
+  background: color-mix(in srgb, var(--pale) 85%, transparent);
+  border: 1px solid color-mix(in srgb, var(--blue) 25%, transparent);
+}
+.clipping-head { display: flex; justify-content: space-between; align-items: baseline; gap: .8rem; margin-bottom: .5rem; }
+.clipping-outlet { font-family: var(--font-logo), serif; font-size: 1.3rem; color: var(--blue); }
+.clipping-date { font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; background: var(--blue); color: var(--white); padding: .2rem .5rem; white-space: nowrap; }
+.clipping h3 { margin: 0 0 .5rem; font-size: 1.05rem; line-height: 1.35; color: var(--ink); }
+.clipping p { margin: 0; font-size: .9rem; line-height: 1.55; }
+
+/* ---------- team flip cards ---------- */
+.team { padding: clamp(4.5rem, 10vw, 8rem) 0; background: var(--pale-soft); border-top: var(--border); }
+.team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.4rem; margin-top: 2.6rem; }
+.flip { perspective: 1200px; }
+.flip-inner { position: relative; height: 400px; transform-style: preserve-3d; }
+.flip-face {
+  position: absolute; inset: 0; display: flex; flex-direction: column; padding: 1.3rem;
+  border: var(--border); backface-visibility: hidden; -webkit-backface-visibility: hidden;
+}
+.flip-front {
+  background: var(--pale); box-shadow: 10px 10px 0 var(--blue);
+  align-items: center; justify-content: center; text-align: center; gap: .5rem;
+}
+.flip-mono { font-family: var(--font-logo), serif; font-size: 5rem; color: var(--blue); line-height: 1; }
+.flip-front h3 { margin: .2rem 0 0; color: var(--blue-deep); font-size: 1.25rem; text-transform: uppercase; }
+.flip-role { font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .14em; background: var(--white); border: 2px solid var(--blue); padding: .25rem .6rem; }
+.flip-hint { position: absolute; bottom: .8rem; font-size: .68rem; letter-spacing: .18em; text-transform: uppercase; opacity: .6; }
+.flip-back {
+  background: var(--blue); color: var(--white); transform: rotateY(180deg);
+  box-shadow: 10px 10px 0 var(--pale); justify-content: center; gap: 1rem;
+}
+.flip-back p { line-height: 1.6; font-size: .95rem; margin: 0; }
+.flip-stats { display: flex; flex-wrap: wrap; gap: .45rem; }
+.flip-stats span { border: 2px solid var(--white); background: rgba(255,255,255,.08); padding: .25rem .55rem; font-size: .68rem; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; }

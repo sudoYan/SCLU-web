@@ -1,35 +1,42 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { motion, useMotionValue, useSpring } from "motion/react";
 
 export default function Cursor() {
-  const [enabled, setEnabled] = useState(false);
-  const [hovering, setHovering] = useState(false);
-  const mx = useMotionValue(-100);
-  const my = useMotionValue(-100);
-  const rx = useSpring(mx, { stiffness: 350, damping: 28 });
-  const ry = useSpring(my, { stiffness: 350, damping: 28 });
+  const x = useMotionValue(-100);
+  const y = useMotionValue(-100);
+  // halo: stiff spring = crisp, not floaty
+  const hx = useSpring(x, { stiffness: 900, damping: 55, mass: 0.15 });
+  const hy = useSpring(y, { stiffness: 900, damping: 55, mass: 0.15 });
+  const s = useMotionValue(1);
+  const hs = useSpring(s, { stiffness: 700, damping: 28 });
 
   useEffect(() => {
     if (!window.matchMedia("(pointer: fine)").matches) return;
-    setEnabled(true);
     document.body.classList.add("has-cursor");
-    const move = (e) => { mx.set(e.clientX); my.set(e.clientY); };
-    const over = (e) => setHovering(!!e.target.closest("a, button, input, select, textarea, [data-hover]"));
-    window.addEventListener("mousemove", move);
-    window.addEventListener("mouseover", over);
+    const move = (e) => { x.set(e.clientX); y.set(e.clientY); };
+    const over = (e) => {
+      const t = e.target instanceof Element
+        ? e.target.closest("a, button, input, select, textarea, [data-hover]")
+        : null;
+      s.set(t ? 1.9 : 1); // snappy pop over interactives
+    };
+    const leave = () => { x.set(-100); y.set(-100); };
+    window.addEventListener("mousemove", move, { passive: true });
+    window.addEventListener("mouseover", over, { passive: true });
+    document.documentElement.addEventListener("mouseleave", leave);
     return () => {
       document.body.classList.remove("has-cursor");
       window.removeEventListener("mousemove", move);
       window.removeEventListener("mouseover", over);
+      document.documentElement.removeEventListener("mouseleave", leave);
     };
-  }, []);
+  }, [x, y, s]);
 
-  if (!enabled) return null;
   return (
     <>
-      <motion.div className="cursor-dot" style={{ x: mx, y: my }} />
-      <motion.div className={`cursor-ring ${hovering ? "cursor-ring--on" : ""}`} style={{ x: rx, y: ry }} />
+      <motion.div className="cursor-dot" style={{ x, y }} />
+      <motion.div className="cursor-ring" style={{ x: hx, y: hy, scale: hs }} />
     </>
   );
 }
