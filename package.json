@@ -1,0 +1,19 @@
+{
+  "name": "sclu-site",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Full-stack site for the Students' Civil Liberties Union (San Diego)",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "animejs": "^4.1.0",
+    "motion": "^12.12.1",
+    "next": "^15.3.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  }
+}
