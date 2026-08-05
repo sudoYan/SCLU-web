@@ -1,18 +1,23 @@
 import { MARQUEE } from "../lib/content";
 
-export default function Marquee() {
-  const row = (hidden) => (
-    <div aria-hidden={hidden} style={{ display: "flex", gap: "2.75rem", paddingRight: "2.75rem" }}>
+function Row({ hidden }) {
+  return (
+    <div aria-hidden={hidden || undefined} style={{ display: "flex" }}>
       {MARQUEE.map((m) => (
-        <span key={m}>{m} <em>✊</em></span>
+        <span key={m}>{m} <em>⚖</em></span>
       ))}
     </div>
   );
+}
+
+export default function Marquee() {
   return (
-    <div className="marquee">
-      <div className="marquee-track">
-        {row(false)}
-        {row(true)}
+    <div>
+      <div className="marquee marquee--blue">
+        <div className="marquee-track"><Row /><Row hidden /></div>
+      </div>
+      <div className="marquee marquee--pale marquee--rev">
+        <div className="marquee-track"><Row /><Row hidden /></div>
       </div>
     </div>
   );

@@ -1,5 +1,7 @@
 import { PILLARS } from "../lib/content";
 import ScrollProgress from "../components/ScrollProgress";
+import Cursor from "../components/Cursor";
+import Justice from "../components/Justice";
 import Nav from "../components/Nav";
 import Hero from "../components/Hero";
 import Marquee from "../components/Marquee";
@@ -12,6 +14,8 @@ export default function Home() {
   return (
     <>
       <ScrollProgress />
+      <Cursor />
+      <Justice />
       <Nav />
       <main>
         <Hero />

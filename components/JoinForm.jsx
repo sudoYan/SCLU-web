@@ -1,16 +1,14 @@
 "use client";
 import { useEffect, useState } from "react";
 import { WINGS } from "../lib/content";
+import Magnetic from "./Magnetic";
 
 export default function JoinForm() {
   const [count, setCount] = useState(null);
-  const [status, setStatus] = useState("idle"); // idle | sending | done | error
+  const [status, setStatus] = useState("idle");
 
   useEffect(() => {
-    fetch("/api/join")
-      .then((r) => r.json())
-      .then((d) => setCount(d.count))
-      .catch(() => {});
+    fetch("/api/join").then((r) => r.json()).then((d) => setCount(d.count)).catch(() => {});
   }, []);
 
   async function onSubmit(e) {
@@ -35,31 +33,23 @@ export default function JoinForm() {
 
   return (
     <form className="join-form" onSubmit={onSubmit}>
-      <label>
-        Name
-        <input name="name" required placeholder="Your name" />
-      </label>
-      <label>
-        Email
-        <input name="email" type="email" required placeholder="you@school.edu" />
-      </label>
-      <label>
-        Pick your wing
+      <label>Name<input name="name" required placeholder="Your name" /></label>
+      <label>Email<input name="email" type="email" required placeholder="you@school.edu" /></label>
+      <label>Pick your wing
         <select name="wing" defaultValue="Outreach">
           {WINGS.map((w) => (
-            <option key={w.name} value={w.name}>
-              {w.name} ({w.skill})
-            </option>
+            <option key={w.name} value={w.name}>{w.name} ({w.skill})</option>
           ))}
         </select>
       </label>
-      <label>
-        Why do you want to organize? (optional)
+      <label>Why do you want to organize? (optional)
         <textarea name="message" rows={3} placeholder="Because…" />
       </label>
-      <button disabled={status === "sending"}>
-        {status === "sending" ? "Signing up…" : "Join the Union ✊"}
-      </button>
+      <Magnetic strength={0.25}>
+        <button disabled={status === "sending"}>
+          {status === "sending" ? "Signing up…" : "Join the Union ✊"}
+        </button>
+      </Magnetic>
       {status === "done" && (
         <p className="join-success" role="status">
           Welcome to the union!{count != null ? ` You're member #${count}.` : ""}

@@ -5,7 +5,7 @@ export default function Footer() {
     <footer className="footer">
       <div className="container footer-grid">
         <div>
-          <div className="big">SCLU</div>
+          <img src="/logo-white.png" alt="SCLU" className="footer-logo" />
           <p>{SITE.name}</p>
         </div>
         <div>
@@ -24,9 +24,8 @@ export default function Footer() {
       </div>
       <div className="container">
         <small>
-          Content adapted from sclusd.org and the Wikipedia article on the Students&rsquo; Civil
-          Liberties Union. Photography via Unsplash/Pexels contributors. Built with Next.js,
-          motion.dev and anime.js.
+          Content adapted from sclusd.org and Wikipedia. Built with Next.js, motion.dev and anime.js.
+          Brand colors #0541a4 / #ffffff / pale yellow.
         </small>
       </div>
     </footer>
