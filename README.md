@@ -12,7 +12,7 @@ each with why-it-matters copy and pictures, followed by current campaigns and a 
 
 - **Frontend:** Next.js App Router (server components + SSR)
 - **Animation:** `motion` (scroll progress, parallax, in-view reveals) + `animejs` v4 (elastic hero letters, scramble-decode tagline)
-- **Backend:** Next.js API routes — `GET /api/pillars`, `GET|POST /api/join` (JSON-file persistence in `data/members.json`, git-ignored)
+- **Content:** Static site data imported from `lib/content` with no API dependency for page content
 
 ## Run locally
 
