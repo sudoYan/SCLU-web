@@ -20,6 +20,7 @@ export default function Footer() {
           <p><a href="#civil">C — Civil</a></p>
           <p><a href="#liberties">L — Liberties</a></p>
           <p><a href="#union">U — Union</a></p>
+          <p><a href="/schedule">Book a meeting</a></p>
         </div>
       </div>
       <div className="container">

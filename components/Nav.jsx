@@ -22,6 +22,7 @@ export default function Nav() {
         <a href="#liberties">Liberties</a>
         <a href="#union">Union</a>
         <a href="#campaigns">Campaigns</a>
+        <a href="/schedule">Schedule</a>
         <Magnetic strength={0.3}>
           <a href="#press">Press</a>
           <a href="#team">Team</a>

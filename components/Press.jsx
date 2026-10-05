@@ -2,34 +2,24 @@
 import { motion } from "motion/react";
 import { PRESS } from "../lib/content";
 
-const TILTS = [-3, 2, -2, 3, -1.5];
-
 export default function Press() {
   return (
     <section className="press" id="press">
       <div className="container">
-        <p className="section-kicker">News coverage</p>
+        <p className="section-kicker">In the media</p>
         <h2 className="section-title">The Receipts</h2>
         <p className="section-sub">
-          When youth organize, the press pays attention. Go on — drag the clippings around.
+          A manual list of recent coverage and community moments we want to keep visible and easy to update.
         </p>
-        <div className="press-board">
+        <div className="press-board press-list">
           {PRESS.map((item, i) => (
             <motion.article
-              key={item.outlet + item.date}
+              key={item.outlet + item.date + item.headline}
               className="clipping"
-              style={{ rotate: TILTS[i % TILTS.length] }}
-              drag
-              dragConstraints={{ left: -140, right: 140, top: -90, bottom: 90 }}
-              dragElastic={0.2}
-              dragMomentum={false}
-              whileDrag={{ scale: 1.06, rotate: 0, zIndex: 10, boxShadow: "14px 14px 0 var(--blue)" }}
-              whileHover={{ scale: 1.04, rotate: 0 }}
-              whileTap={{ scale: 0.97 }}
-              initial={{ opacity: 0, y: 40 }}
+              initial={{ opacity: 0, y: 36 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.3 }}
-              transition={{ type: "spring", stiffness: 260, damping: 22, delay: i * 0.08 }}
+              transition={{ duration: 0.45, delay: i * 0.06, ease: "easeOut" }}
             >
               <span className="clipping-tape" aria-hidden="true" />
               <div className="clipping-head">
