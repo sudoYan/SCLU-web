@@ -2,7 +2,6 @@ import { PILLARS } from "../lib/content";
 import ScrollProgress from "../components/ScrollProgress";
 import Cursor from "../components/Cursor";
 import Justice from "../components/Justice";
-import Nav from "../components/Nav";
 import Hero from "../components/Hero";
 import Marquee from "../components/Marquee";
 import LetterSection from "../components/LetterSection";
@@ -17,7 +16,6 @@ export default function Home() {
       <ScrollProgress />
       <Cursor />
       <Justice />
-      <Nav />
       <main>
         <Hero />
         <Marquee />
@@ -27,6 +25,35 @@ export default function Home() {
         <Campaigns />
         <Press />
         <Team />
+        <section className="donate-section" id="donate">
+          <div className="container donate-grid">
+            <div>
+              <p className="section-kicker">Support the work</p>
+              <h2>Fund youth organizing in San Diego.</h2>
+              <p>
+                Donations help cover training, direct-action support, community outreach, and the costs
+                of organizing a new generation of leaders who are building power for democratic renewal.
+              </p>
+              <a
+                href="https://www.zeffy.com/en-US/donation-form/donate-to-empower-youth-organizing-in-san-diego-2"
+                target="_blank"
+                rel="noreferrer"
+                className="primary-link donate-link"
+              >
+                Donate now
+              </a>
+            </div>
+            <div className="donate-embed-shell">
+              <iframe
+                src="https://www.zeffy.com/en-US/donation-form/donate-to-empower-youth-organizing-in-san-diego-2"
+                title="Donate to SCLU"
+                loading="lazy"
+                frameBorder="0"
+                allowFullScreen
+              />
+            </div>
+          </div>
+        </section>
         <section className="join" id="join">
           <div className="container join-grid">
             <div>

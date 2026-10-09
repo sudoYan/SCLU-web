@@ -13,20 +13,18 @@ export default function Nav() {
 
   return (
     <nav className={`nav ${scrolled ? "nav--scrolled" : ""}`}>
-      <a className="nav-logo" href="#top" aria-label="SCLU home">
-        <img src="/logo-blue.png" alt="SCLU" className="nav-logo-img" />
+      <a className="nav-logo" href="/" aria-label="SCLU home">
+        <span className="nav-brand">SCLU</span>
       </a>
       <div className="nav-links">
-        <a href="#students">Students</a>
-        <a href="#civil">Civil</a>
-        <a href="#liberties">Liberties</a>
-        <a href="#union">Union</a>
-        <a href="#campaigns">Campaigns</a>
+        <a href="/#campaigns">Campaigns</a>
+        <a href="/announcements">Announcements</a>
+        <a href="/#press">Press</a>
+        <a href="/#team">Team</a>
         <a href="/schedule">Schedule</a>
+        <a href="https://www.zeffy.com/en-US/donation-form/donate-to-empower-youth-organizing-in-san-diego-2" target="_blank" rel="noreferrer">Donate</a>
         <Magnetic strength={0.3}>
-          <a href="#press">Press</a>
-          <a href="#team">Team</a>
-          <a className="nav-cta" href="#join">Join ✊</a>
+          <a className="nav-cta" href="/#join">Join ✊</a>
         </Magnetic>
       </div>
     </nav>
